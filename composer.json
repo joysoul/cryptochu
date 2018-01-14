@@ -20,6 +20,9 @@
     },
     "autoload": {
         "psr-4": {
+            "cryptochu\\crypto\\": "src/crypto/",
+            "cryptochu\\crypto\\tests\\": "tests/crypto/",
+
             "cryptochu\\exceptions\\": "src/exceptions/",
 
             "cryptochu\\tests\\": "tests/",
