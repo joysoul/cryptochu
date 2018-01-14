@@ -4,6 +4,8 @@ namespace cryptochu\utilities;
 use cryptochu\exceptions\TypeException;
 
 /**
+ * TypeUtility contains utility methods related to types.
+ *
  * @author Emile Pels
  * @package cryptochu\utilities\TypeUtility
  */
@@ -24,6 +26,8 @@ class TypeUtility
     const TYPE_STRING = 'string';
 
     /**
+     * getType gets the type for the provided value.
+     *
      * @param mixed $value
      *
      * @return string
@@ -40,6 +44,8 @@ class TypeUtility
     }
 
     /**
+     * isType indicates whether the provided value has the provided type.
+     *
      * @param mixed $value
      * @param string $type
      *
@@ -51,6 +57,8 @@ class TypeUtility
     }
 
     /**
+     * assertIsType throws a TypeException if the provided value does not have the provided type.
+     *
      * @param mixed $value
      * @param string $type
      *
