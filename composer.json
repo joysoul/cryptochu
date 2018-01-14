@@ -1,0 +1,18 @@
+{
+    "name": "cryptochu/cryptochu",
+    "authors": [
+        {
+            "name": "Emile Pels",
+            "email": "mail@emilepels.nl"
+        },
+        {
+            "name": "Ivo Chen",
+            "email": "ivo.spam@outlook.com"
+        },
+        {
+            "name": "Max Teeuwen",
+            "email": "maxh.teeuwen@gmail.com"
+        }
+    ],
+    "require": {}
+}
