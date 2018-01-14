@@ -5,6 +5,8 @@ use cryptochu\utilities\StringUtility;
 use cryptochu\utilities\TypeUtility;
 
 /**
+ * CryptoCurrency refers to a currency like bitcoin or ethereum.
+ *
  * @author Emile Pels
  * @package cryptochu\crypto\currencies
  */
@@ -51,6 +53,8 @@ class CryptoCurrency
     }
 
     /**
+     * Full name of the currency (e.g. "bitcoin").
+     *
      * @return string
      */
     public function getName(): string
@@ -59,6 +63,8 @@ class CryptoCurrency
     }
 
     /**
+     * Symbol of the currency (e.g. "btc" for "bitcoin").
+     *
      * @return string
      */
     public function getSymbol(): string
@@ -67,6 +73,8 @@ class CryptoCurrency
     }
 
     /**
+     * Indicates whether the provided value is equal to the current CryptoCurrency object.
+     *
      * @param $other
      *
      * @return bool
