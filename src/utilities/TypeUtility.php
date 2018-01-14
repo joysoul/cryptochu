@@ -12,7 +12,6 @@ class TypeUtility
     /**
      * Error constants.
      */
-    const ERROR_NOT_SUBCLASS_OF = 'Type "%s" is not a subclass of "%s".';
     const ERROR_UNEXPECTED_TYPE = 'Expected type "%s", got "%s".';
 
     /**
