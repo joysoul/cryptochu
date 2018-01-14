@@ -20,6 +20,9 @@
     },
     "autoload": {
         "psr-4": {
+            "cryptochu\\common\\": "src/common/",
+            "cryptochu\\common\\tests\\": "tests/common/",
+
             "cryptochu\\crypto\\": "src/crypto/",
             "cryptochu\\crypto\\tests\\": "tests/crypto/",
 
