@@ -25,13 +25,10 @@ class MoneyAmountBuilder
     const ERROR_VALUE_OUT_OF_BOUNDS = 'Value for "%s" ("%s") is out of bounds.';
 
     /**
-     * Value constants.
+     * Default constants.
      */
     const WHOLE_DEFAULT = 0;
-    const WHOLE_MINIMUM = 0;
     const CENTS_DEFAULT = 0;
-    const CENTS_MINIMUM = 0;
-    const CENTS_MAXIMUM = MoneyAmount::CENTS_IN_WHOLE - 1;
 
     /**
      * @var EnumRegularCurrency
@@ -57,7 +54,7 @@ class MoneyAmountBuilder
         $this->regularCurrency = $regularCurrency;
 
         $this->whole = self::WHOLE_DEFAULT;
-        $this->cents = self::WHOLE_MINIMUM;
+        $this->cents = self::CENTS_DEFAULT;
     }
 
     /**
@@ -126,11 +123,11 @@ class MoneyAmountBuilder
      */
     private function assertValuesWithinBounds()
     {
-        if ($this->whole < self::WHOLE_MINIMUM) {
+        if ($this->whole < MoneyAmount::WHOLE_MINIMUM) {
             throw new ValueException(vsprintf(self::ERROR_VALUE_OUT_OF_BOUNDS, ['whole', $this->whole]));
         }
 
-        if ($this->cents < self::CENTS_MINIMUM || $this->cents > self::CENTS_MAXIMUM) {
+        if ($this->cents < MoneyAmount::CENTS_MINIMUM || $this->cents > MoneyAmount::CENTS_MAXIMUM) {
             throw new ValueException(vsprintf(self::ERROR_VALUE_OUT_OF_BOUNDS, ['cents', $this->cents]));
         }
     }

@@ -23,9 +23,12 @@ class MoneyAmount
     const ERROR_CURRENCY_NOT_EQUALS = 'Can not compare currency "%s" to "%s".';
 
     /**
-     * Minimum value for amount.
+     * Value constants.
      */
     const AMOUNT_MINIMUM = 0;
+    const CENTS_MAXIMUM = self::CENTS_IN_WHOLE - 1;
+    const CENTS_MINIMUM = 0;
+    const WHOLE_MINIMUM = 0;
 
     /**
      * Number of cents in a "whole" currency unit.
