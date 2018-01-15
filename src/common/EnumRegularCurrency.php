@@ -2,6 +2,8 @@
 namespace cryptochu\common;
 
 /**
+ * EnumRegularCurrency represents a "regular", non-crypto, currency.
+ *
  * @author Emile Pels
  * @package cryptochu\common
  */
