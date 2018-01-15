@@ -28,6 +28,9 @@
 
             "cryptochu\\exceptions\\": "src/exceptions/",
 
+            "cryptochu\\money\\": "src/money/",
+            "cryptochu\\money\\tests\\": "tests/money/",
+
             "cryptochu\\tests\\": "tests/",
 
             "cryptochu\\utilities\\": "src/utilities/",
