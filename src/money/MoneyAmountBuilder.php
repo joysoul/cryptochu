@@ -20,11 +20,6 @@ use cryptochu\exceptions\ValueException;
 class MoneyAmountBuilder
 {
     /**
-     * Error constants.
-     */
-    const ERROR_VALUE_OUT_OF_BOUNDS = 'Value for "%s" ("%s") is out of bounds.';
-
-    /**
      * Default constants.
      */
     const WHOLE_DEFAULT = 0;
@@ -123,13 +118,8 @@ class MoneyAmountBuilder
      */
     private function assertValuesWithinBounds()
     {
-        if ($this->whole < MoneyAmount::WHOLE_MINIMUM) {
-            throw new ValueException(vsprintf(self::ERROR_VALUE_OUT_OF_BOUNDS, ['whole', $this->whole]));
-        }
-
-        if ($this->cents < MoneyAmount::CENTS_MINIMUM || $this->cents > MoneyAmount::CENTS_MAXIMUM) {
-            throw new ValueException(vsprintf(self::ERROR_VALUE_OUT_OF_BOUNDS, ['cents', $this->cents]));
-        }
+        MoneyAmount::assertCentsWithinBounds($this->cents);
+        MoneyAmount::assertWholeWithinBounds($this->whole);
     }
 
     /**

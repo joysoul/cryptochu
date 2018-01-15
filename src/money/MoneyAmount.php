@@ -21,6 +21,7 @@ class MoneyAmount
     const ERROR_AMOUNT_IS_NOT_INTEGER = 'Amount "%s" is not a valid integer.';
     const ERROR_AMOUNT_TOO_LOW = 'Amount "%s" is lower than minimum "%s"';
     const ERROR_CURRENCY_NOT_EQUALS = 'Can not compare currency "%s" to "%s".';
+    const ERROR_VALUE_OUT_OF_BOUNDS = 'Value for "%s" ("%s") is out of bounds.';
 
     /**
      * Value constants.
@@ -58,6 +59,30 @@ class MoneyAmount
 
         $this->amount = $amount;
         $this->regularCurrency = $regularCurrency;
+    }
+
+    /**
+     * @param int $cents
+     *
+     * @throws ValueException
+     */
+    public static function assertCentsWithinBounds(int $cents)
+    {
+        if ($cents < self::CENTS_MINIMUM || $cents > self::CENTS_MAXIMUM) {
+            throw new ValueException(vsprintf(self::ERROR_VALUE_OUT_OF_BOUNDS, ['cents', $cents]));
+        }
+    }
+
+    /**
+     * @param int $whole
+     * 
+     * @throws ValueException
+     */
+    public static function assertWholeWithinBounds(int $whole)
+    {
+        if ($whole < self::WHOLE_MINIMUM) {
+            throw new ValueException(vsprintf(self::ERROR_VALUE_OUT_OF_BOUNDS, ['whole', $whole]));
+        }
     }
 
     /**
