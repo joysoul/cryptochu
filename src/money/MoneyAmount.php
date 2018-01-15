@@ -174,7 +174,11 @@ class MoneyAmount
      */
     public function getCents(): int
     {
-        return $this->getAmount() % self::CENTS_IN_WHOLE;
+        $cents = $this->getAmount() % self::CENTS_IN_WHOLE;
+
+        $this->assertCentsWithinBounds($cents);
+
+        return $cents;
     }
 
     /**
@@ -184,7 +188,11 @@ class MoneyAmount
      */
     public function getWhole(): int
     {
-        return ($this->getAmount() - $this->getCents()) / self::CENTS_IN_WHOLE;
+        $whole = ($this->getAmount() - $this->getCents()) / self::CENTS_IN_WHOLE;
+
+        $this->assertWholeWithinBounds($whole);
+
+        return $whole;
     }
 
     /**
