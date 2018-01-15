@@ -1,13 +1,14 @@
 <?php
-namespace cryptochu\common;
+namespace cryptochu\money;
 
+use cryptochu\common\EnumRegularCurrency;
 use cryptochu\exceptions\ValueException;
 use cryptochu\utilities\TypeUtility;
-use PHPUnit\Framework\Constraint\RegularExpression;
 
 /**
  * MoneyAmount represents a monetary value.
  * These are not properly handled as floating point numbers, so we store the number of cents as integers.
+ * 12345 is 123.45 of the given currency, whereas 1000 refers to 10.00.
  *
  * @author Emile Pels
  * @package cryptochu\common
@@ -24,7 +25,7 @@ class MoneyAmount
     /**
      * Minimum value for amount.
      */
-    const AMOUNT_MINIMUM = 1;
+    const AMOUNT_MINIMUM = 0;
 
     /**
      * Number of cents in a "whole" currency unit.
@@ -48,7 +49,7 @@ class MoneyAmount
      * @param int $amount
      * @param EnumRegularCurrency $regularCurrency
      */
-    private function __construct($amount, EnumRegularCurrency $regularCurrency)
+    public function __construct($amount, EnumRegularCurrency $regularCurrency)
     {
         $this->assertAmountIsValid($amount);
 
