@@ -60,6 +60,26 @@ class MoneyAmount
     /**
      * @param int $amount
      *
+     * @return MoneyAmount
+     */
+    public static function fromEuro($amount): MoneyAmount
+    {
+        return new static($amount, EnumRegularCurrency::euro());
+    }
+
+    /**
+     * @param int $amount
+     *
+     * @return MoneyAmount
+     */
+    public static function fromUnitedStatesDollar($amount): MoneyAmount
+    {
+        return new static($amount, EnumRegularCurrency::unitedStatesDollar());
+    }
+
+    /**
+     * @param int $amount
+     *
      * @throws ValueException
      */
     private function assertAmountIsValid($amount)
@@ -195,25 +215,5 @@ class MoneyAmount
     public function lessThanOrEquals(MoneyAmount $other): bool
     {
         return $this->getAmount() <= $other->getAmount();
-    }
-
-    /**
-     * @param int $amount
-     *
-     * @return MoneyAmount
-     */
-    public static function fromEuro($amount): MoneyAmount
-    {
-        return new static($amount, EnumRegularCurrency::euro());
-    }
-
-    /**
-     * @param int $amount
-     *
-     * @return MoneyAmount
-     */
-    public static function fromUnitedStatesDollar($amount): MoneyAmount
-    {
-        return new static($amount, EnumRegularCurrency::unitedStatesDollar());
     }
 }
