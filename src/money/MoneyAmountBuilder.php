@@ -41,7 +41,6 @@ class MoneyAmountBuilder
     private $cents;
 
     /**
-     * MoneyAmountBuilder constructor.
      * @param EnumRegularCurrency $regularCurrency
      */
     private function __construct(EnumRegularCurrency $regularCurrency)
