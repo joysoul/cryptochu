@@ -1,7 +1,7 @@
 <?php
-namespace cryptochu\common\tests;
+namespace cryptochu\money\tests;
 
-use cryptochu\common\MoneyAmount;
+use cryptochu\money\MoneyAmount;
 use cryptochu\tests\TestCase;
 
 /**
