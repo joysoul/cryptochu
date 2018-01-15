@@ -53,13 +53,7 @@ abstract class Enum
      */
     public function equals($other): bool
     {
-        if (is_null($other)) {
-            return false;
-        }
-
-        if (TypeUtility::isType($other, TypeUtility::getType($this))) {
-            // Ok
-        } else {
+        if (is_null($other) || TypeUtility::isType($other, TypeUtility::getType($this)) === false) {
             return false;
         }
 

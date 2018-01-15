@@ -127,9 +127,7 @@ class MoneyAmount
      */
     private function assertSameCurrency(MoneyAmount $other)
     {
-        if ($this->sameCurrency($other)) {
-            // Ok
-        } else {
+        if ($this->sameCurrency($other) === false) {
             throw new ValueException(
                 vsprintf(
                     self::ERROR_CURRENCY_NOT_EQUALS,
