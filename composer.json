@@ -24,9 +24,13 @@
             "cryptochu\\common\\tests\\": "tests/common/",
 
             "cryptochu\\crypto\\": "src/crypto/",
+            "cryptochu\\crypto\\services\\": "src/crypto/services/",
+            "cryptochu\\crypto\\services\\tests\\": "tests/crypto/services/",
             "cryptochu\\crypto\\tests\\": "tests/crypto/",
 
             "cryptochu\\exceptions\\": "src/exceptions/",
+
+            "cryptochu\\http\\": "src/http/",
 
             "cryptochu\\money\\": "src/money/",
             "cryptochu\\money\\tests\\": "tests/money/",
