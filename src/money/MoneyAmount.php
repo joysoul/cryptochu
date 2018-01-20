@@ -50,6 +50,8 @@ class MoneyAmount
      * We do not scalar type hint the amount so no implicit casts occur and we can assert an integer is passed.
      * This decreases the risk of, accidentally, providing a float.
      *
+     * Usage of this constructor is discouraged: instantiation through the static factory methods should be preferred.
+     *
      * @param int $amount
      * @param EnumRegularCurrency $regularCurrency
      */
