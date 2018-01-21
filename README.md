@@ -1,6 +1,6 @@
 # cryptochu
 
-
+[![Build Status](https://travis-ci.com/epels/cryptochu.svg?token=fFCsEza59TasaQuy6qDV&branch=master)](https://travis-ci.com/epels/cryptochu)
 
 ### Coding style
 We follow the [PSR-2](http://www.php-fig.org/psr/psr-2/) style guide.
