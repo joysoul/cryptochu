@@ -230,6 +230,8 @@ class MoneyAmount
      */
     public function greaterThanOrEquals(MoneyAmount $other): bool
     {
+        $this->assertSameCurrency($other);
+
         return $this->getAmount() >= $other->getAmount();
     }
 
@@ -240,6 +242,8 @@ class MoneyAmount
      */
     public function lessThan(MoneyAmount $other): bool
     {
+        $this->assertSameCurrency($other);
+
         return $this->getAmount() < $other->getAmount();
     }
 
@@ -250,6 +254,32 @@ class MoneyAmount
      */
     public function lessThanOrEquals(MoneyAmount $other): bool
     {
+        $this->assertSameCurrency($other);
+
         return $this->getAmount() <= $other->getAmount();
+    }
+
+    /**
+     * @param MoneyAmount $other
+     *
+     * @return MoneyAmount
+     */
+    public function add(MoneyAmount $other): MoneyAmount
+    {
+        $this->assertSameCurrency($other);
+
+        return new MoneyAmount($this->getAmount() + $other->getAmount(), $this->regularCurrency);
+    }
+
+    /**
+     * @param MoneyAmount $other
+     *
+     * @return MoneyAmount
+     */
+    public function subtract(MoneyAmount $other): MoneyAmount
+    {
+        $this->assertSameCurrency($other);
+
+        return new MoneyAmount($this->getAmount() - $other->getAmount(), $this->regularCurrency);
     }
 }
