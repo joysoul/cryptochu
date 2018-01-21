@@ -5,6 +5,5 @@ php:
   - nightly
 install:
   - composer install
-  - echo "\n" | pecl install intl
 script:
   - vendor/bin/phpunit
