@@ -6,7 +6,8 @@
 We follow the [PSR-2](http://www.php-fig.org/psr/psr-2/) style guide.
 
 ### Installation
-To run the project locally, clone this repository, `cd` into the root directory and run `composer install` to fetch dependencies.
+Clone this repository and run `composer install` from its root directory.
+Make sure the `intl` PHP extension is [installed](http://php.net/manual/en/intl.installation.php).
 
 ### Tests
 To run tests with default settings, simply run the following command. It will look in `phpunit.xml`.
