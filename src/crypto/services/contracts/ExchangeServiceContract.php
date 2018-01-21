@@ -10,6 +10,8 @@ namespace cryptochu\crypto\services\contracts;
 interface ExchangeServiceContract
 {
     /**
+     * Gets the name for the exchange.
+     *
      * @return string
      */
     public function getExchangeName(): string;

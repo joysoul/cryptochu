@@ -4,6 +4,8 @@ namespace cryptochu\utilities;
 use cryptochu\exceptions\ValueException;
 
 /**
+ * JsonUtility contains utility methods related to JSON.
+ *
  * @author Emile Pels
  * @package cryptochu\utilities
  */
@@ -20,6 +22,8 @@ class JsonUtility
     const DECODE_TO_ASSOCIATIVE_ARRAY = true;
 
     /**
+     * Attempts decoding a JSON string to an associative array.
+     *
      * @param string $json
      *
      * @return array
