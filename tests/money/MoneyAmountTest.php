@@ -1,6 +1,7 @@
 <?php
 namespace cryptochu\money\tests;
 
+use cryptochu\exceptions\ValueException;
 use cryptochu\money\MoneyAmount;
 use cryptochu\money\MoneyAmountBuilder;
 use cryptochu\tests\TestCase;
@@ -99,6 +100,7 @@ class MoneyAmountTest extends TestCase
             [false, MoneyAmount::fromUnitedStatesDollar(2000), MoneyAmount::fromEuro(1000)],
             [false, MoneyAmount::fromEuro(1000), MoneyAmount::fromUnitedStatesDollar(1001)],
             [false, MoneyAmount::fromUnitedStatesDollar(1), MoneyAmount::fromEuro(2)],
+            [false, MoneyAmount::fromUnitedStatesDollar(1000), null],
         ];
     }
 
@@ -269,5 +271,25 @@ class MoneyAmountTest extends TestCase
                 MoneyAmount::fromEuro(10000)->subtract(MoneyAmountBuilder::fromEuro()->whole(50)->cents(1)->build())
             ]
         ];
+    }
+
+    /**
+     *
+     */
+    public function testAssertSameCurrency()
+    {
+        static::expectException(ValueException::class);
+
+        MoneyAmount::fromEuro(100)->lessThan(MoneyAmount::fromUnitedStatesDollar(1));
+    }
+
+    /**
+     *
+     */
+    public function testAssertAmountIsValid()
+    {
+        static::expectException(ValueException::class);
+
+        MoneyAmount::fromEuro(-100);
     }
 }
