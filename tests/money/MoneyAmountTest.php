@@ -2,6 +2,7 @@
 namespace cryptochu\money\tests;
 
 use cryptochu\money\MoneyAmount;
+use cryptochu\money\MoneyAmountBuilder;
 use cryptochu\tests\TestCase;
 
 /**
@@ -202,6 +203,71 @@ class MoneyAmountTest extends TestCase
 
             [false, MoneyAmount::fromEuro(1000), MoneyAmount::fromEuro(100)],
             [false, MoneyAmount::fromUnitedStatesDollar(2), MoneyAmount::fromUnitedStatesDollar(1)],
+        ];
+    }
+
+    /**
+     * @param MoneyAmount $expected
+     * @param MoneyAmount $left
+     * @param MoneyAmount $right
+     * @dataProvider dataProviderAdd
+     */
+    public function testAdd(MoneyAmount $expected, MoneyAmount $left, MoneyAmount $right)
+    {
+        static::assertEquals($expected, $left->add($right));
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderAdd(): array
+    {
+        return [
+            [
+                MoneyAmount::fromEuro(123456),
+                MoneyAmount::fromEuro(123400),
+                MoneyAmount::fromEuro(56)
+            ],
+            [
+                MoneyAmount::fromUnitedStatesDollar(15),
+                MoneyAmount::fromUnitedStatesDollar(10),
+                MoneyAmount::fromUnitedStatesDollar(5)
+            ],
+            [
+                MoneyAmount::fromUnitedStatesDollar(137),
+                MoneyAmount::fromUnitedStatesDollar(99),
+                MoneyAmount::fromUnitedStatesDollar(38)
+            ],
+        ];
+    }
+
+    /**
+     * @param MoneyAmount $expected
+     * @param MoneyAmount $left
+     * @param MoneyAmount $right
+     * @dataProvider dataProviderSubtract
+     */
+    public function testSubtract(MoneyAmount $expected, MoneyAmount $left, MoneyAmount $right)
+    {
+        static::assertEquals($expected, $left->subtract($right));
+    }
+
+    /**
+     * @return array
+     */
+    public function dataProviderSubtract(): array
+    {
+        return [
+            [
+                MoneyAmount::fromEuro(99),
+                MoneyAmount::fromEuro(123),
+                MoneyAmount::fromEuro(24)
+            ],
+            [
+                MoneyAmount::fromEuro(5000),
+                MoneyAmount::fromEuro(9999),
+                MoneyAmount::fromEuro(10000)->subtract(MoneyAmountBuilder::fromEuro()->whole(50)->cents(1)->build())
+            ]
         ];
     }
 }

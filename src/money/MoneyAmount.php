@@ -50,6 +50,8 @@ class MoneyAmount
      * We do not scalar type hint the amount so no implicit casts occur and we can assert an integer is passed.
      * This decreases the risk of, accidentally, providing a float.
      *
+     * Usage of this constructor is discouraged: instantiation through the static factory methods should be preferred.
+     *
      * @param int $amount
      * @param EnumRegularCurrency $regularCurrency
      */
@@ -228,6 +230,8 @@ class MoneyAmount
      */
     public function greaterThanOrEquals(MoneyAmount $other): bool
     {
+        $this->assertSameCurrency($other);
+
         return $this->getAmount() >= $other->getAmount();
     }
 
@@ -238,6 +242,8 @@ class MoneyAmount
      */
     public function lessThan(MoneyAmount $other): bool
     {
+        $this->assertSameCurrency($other);
+
         return $this->getAmount() < $other->getAmount();
     }
 
@@ -248,6 +254,32 @@ class MoneyAmount
      */
     public function lessThanOrEquals(MoneyAmount $other): bool
     {
+        $this->assertSameCurrency($other);
+
         return $this->getAmount() <= $other->getAmount();
+    }
+
+    /**
+     * @param MoneyAmount $other
+     *
+     * @return MoneyAmount
+     */
+    public function add(MoneyAmount $other): MoneyAmount
+    {
+        $this->assertSameCurrency($other);
+
+        return new MoneyAmount($this->getAmount() + $other->getAmount(), $this->regularCurrency);
+    }
+
+    /**
+     * @param MoneyAmount $other
+     *
+     * @return MoneyAmount
+     */
+    public function subtract(MoneyAmount $other): MoneyAmount
+    {
+        $this->assertSameCurrency($other);
+
+        return new MoneyAmount($this->getAmount() - $other->getAmount(), $this->regularCurrency);
     }
 }

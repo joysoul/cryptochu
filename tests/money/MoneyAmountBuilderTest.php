@@ -19,7 +19,7 @@ class MoneyAmountBuilderTest extends TestCase
      */
     public function testBuild(MoneyAmount $expected, MoneyAmountBuilder $moneyAmountBuilder)
     {
-        static::assertTrue($expected->equals($moneyAmountBuilder->build()));
+        static::assertEquals($expected, $moneyAmountBuilder->build());
     }
 
     /**
@@ -45,7 +45,7 @@ class MoneyAmountBuilderTest extends TestCase
      */
     public function testBuildOverwrite(MoneyAmount $expected, MoneyAmountBuilder $moneyAmountBuilder)
     {
-        static::assertTrue($expected->equals($moneyAmountBuilder->build()));
+        static::assertEquals($expected, $moneyAmountBuilder->build());
     }
 
     /**
