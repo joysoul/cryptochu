@@ -2,7 +2,6 @@
 namespace cryptochu\http;
 
 use cryptochu\exceptions\HttpException;
-use cryptochu\exceptions\ValueException;
 use cryptochu\http\contracts\HttpClient;
 use cryptochu\utilities\TypeUtility;
 
@@ -43,12 +42,22 @@ class CurlHttpClient implements HttpClient
 
         $result = curl_exec($curlHandle);
 
+        $this->assertCurlResultValid($result);
+
+        return $result;
+    }
+
+    /**
+     * @param mixed $result
+     *
+     * @throws HttpException
+     */
+    private function assertCurlResultValid($result)
+    {
         if ($result === false) {
             throw new HttpException(vsprintf(self::ERROR_CURL_FAILED, [curl_error($curlHandle)]));
-        } else {
-            TypeUtility::assertIsType($result, TypeUtility::TYPE_STRING);
-
-            return $result;
         }
+
+        TypeUtility::assertIsType($result, TypeUtility::TYPE_STRING);
     }
 }
