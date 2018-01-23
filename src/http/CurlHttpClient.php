@@ -42,17 +42,18 @@ class CurlHttpClient implements HttpClient
 
         $result = curl_exec($curlHandle);
 
-        $this->assertCurlResultValid($result);
+        $this->assertCurlResultValid($result, $curlHandle);
 
         return $result;
     }
 
     /**
      * @param mixed $result
+     * @param resource $curlHandle
      *
      * @throws HttpException
      */
-    private function assertCurlResultValid($result)
+    private function assertCurlResultValid($result, $curlHandle)
     {
         if ($result === false) {
             throw new HttpException(vsprintf(self::ERROR_CURL_FAILED, [curl_error($curlHandle)]));
