@@ -6,6 +6,7 @@ use cryptochu\crypto\currencies\CryptoCurrency;
 use cryptochu\crypto\services\contracts\PriceServiceContract;
 use cryptochu\http\contracts\HttpClient;
 use cryptochu\money\MoneyAmount;
+use cryptochu\money\MoneyAmountFormatter;
 use cryptochu\money\MoneyAmountParser;
 use cryptochu\services\contracts\LoggerServiceContract;
 use cryptochu\utilities\JsonUtility;
@@ -82,7 +83,7 @@ class BinancePriceService implements PriceServiceContract
         );
 
         $this->loggerService->info('Price retrieved', [
-            'amount' => $ask->getAmount(),
+            'amount' => MoneyAmountFormatter::formatAsString($ask),
             'exchange' => $this->getExchangeName(),
             'type' => 'ask',
         ]);
@@ -104,7 +105,7 @@ class BinancePriceService implements PriceServiceContract
         );
 
         $this->loggerService->info('Price retrieved', [
-            'amount' => $bid->getAmount(),
+            'amount' => MoneyAmountFormatter::formatAsString($bid),
             'exchange' => $this->getExchangeName(),
             'type' => 'bid',
         ]);
