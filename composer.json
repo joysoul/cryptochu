@@ -26,6 +26,9 @@
             "cryptochu\\common\\": "src/common/",
             "cryptochu\\common\\tests\\": "tests/common/",
 
+            "cryptochu\\config\\contracts\\": "src/config/contracts/",
+            "cryptochu\\config\\": "src/config/",
+
             "cryptochu\\crypto\\": "src/crypto/",
             "cryptochu\\crypto\\services\\": "src/crypto/services/",
             "cryptochu\\crypto\\services\\tests\\": "tests/crypto/services/",
