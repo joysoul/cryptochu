@@ -20,11 +20,6 @@ class BinancePriceServiceTest extends TestCase
         . '"bidQty":"0.00020100","askPrice":"12799.00000000","askQty":"0.07053900"}';
 
     /**
-     * Method that should be called on the LoggerServiceInterface.
-     */
-    const METHOD_LOGGER_SERVICE_INFO = 'info';
-
-    /**
      * @var BinancePriceService
      */
     private $binancePriceService;
