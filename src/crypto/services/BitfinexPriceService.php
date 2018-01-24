@@ -7,6 +7,7 @@ use cryptochu\crypto\services\contracts\PriceServiceContract;
 use cryptochu\http\contracts\HttpClient;
 use cryptochu\money\MoneyAmount;
 use cryptochu\money\MoneyAmountParser;
+use cryptochu\services\contracts\LoggerServiceContract;
 use cryptochu\utilities\JsonUtility;
 
 /**
@@ -37,16 +38,23 @@ class BitfinexPriceService implements PriceServiceContract
     private $httpClient;
 
     /**
+     * @var LoggerServiceContract
+     */
+    private $loggerService;
+
+    /**
      * @var MoneyAmountParser
      */
     private $moneyAmountParser;
 
     /**
      * @param HttpClient $httpClient
+     * @param LoggerServiceContract $loggerService
      */
-    public function __construct(HttpClient $httpClient)
+    public function __construct(HttpClient $httpClient, LoggerServiceContract $loggerService)
     {
         $this->httpClient = $httpClient;
+        $this->loggerService = $loggerService;
 
         $this->moneyAmountParser = new MoneyAmountParser(EnumRegularCurrency::unitedStatesDollar());
     }
@@ -68,9 +76,17 @@ class BitfinexPriceService implements PriceServiceContract
      */
     public function getAsk(CryptoCurrency $cryptoCurrency): MoneyAmount
     {
-        return $this->moneyAmountParser->parse(
+        $ask = $this->moneyAmountParser->parse(
             $this->getJsonByCryptoCurrency($cryptoCurrency)[self::KEY_ASK]
         );
+
+        $this->loggerService->info('Price retrieved', [
+            'amount' => $ask->getAmount(),
+            'exchange' => $this->getExchangeName(),
+            'type' => 'ask',
+        ]);
+
+        return $ask;
     }
 
     /**
@@ -82,9 +98,17 @@ class BitfinexPriceService implements PriceServiceContract
      */
     public function getBid(CryptoCurrency $cryptoCurrency): MoneyAmount
     {
-        return $this->moneyAmountParser->parse(
+        $bid = $this->moneyAmountParser->parse(
             $this->getJsonByCryptoCurrency($cryptoCurrency)[self::KEY_BID]
         );
+
+        $this->loggerService->info('Price retrieved', [
+            'amount' => $bid->getAmount(),
+            'exchange' => $this->getExchangeName(),
+            'type' => 'bid',
+        ]);
+
+        return $bid;
     }
 
     /**
