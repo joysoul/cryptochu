@@ -38,13 +38,16 @@ abstract class TestCase extends BaseTestCase
      * Gets a LoggerService mock that registers the provided invocation expectation.
      *
      * @param Invocation $matcher
+     * @param string $method
      *
      * @return LoggerServiceContract
      */
-    protected function getMockLoggerServiceThatIsCalled(Invocation $matcher): LoggerServiceContract
-    {
+    protected function getMockLoggerServiceThatIsCalled(
+        Invocation $matcher,
+        string $method = self::METHOD_LOGGER_SERVICE_INFO
+    ): LoggerServiceContract {
         $mockLoggerService = static::createMock(LoggerServiceContract::class);
-        $mockLoggerService->expects($matcher)->method(self::METHOD_LOGGER_SERVICE_INFO);
+        $mockLoggerService->expects($matcher)->method($method);
 
         /** @var LoggerServiceContract $mockLoggerService */
         return $mockLoggerService;
