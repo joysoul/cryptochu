@@ -8,7 +8,7 @@ use cryptochu\http\contracts\HttpClient;
 use cryptochu\money\MoneyAmount;
 use cryptochu\money\MoneyAmountFormatter;
 use cryptochu\money\MoneyAmountParser;
-use cryptochu\services\contracts\LoggerServiceContract;
+use cryptochu\services\contracts\LoggingServiceContract;
 use cryptochu\utilities\JsonUtility;
 
 /**
@@ -39,7 +39,7 @@ class BinancePriceService implements PriceServiceContract
     private $httpClient;
 
     /**
-     * @var LoggerServiceContract
+     * @var LoggingServiceContract
      */
     private $loggerService;
 
@@ -51,9 +51,9 @@ class BinancePriceService implements PriceServiceContract
 
     /**
      * @param HttpClient $httpClient
-     * @param LoggerServiceContract $loggerService
+     * @param LoggingServiceContract $loggerService
      */
-    public function __construct(HttpClient $httpClient, LoggerServiceContract $loggerService)
+    public function __construct(HttpClient $httpClient, LoggingServiceContract $loggerService)
     {
         $this->httpClient = $httpClient;
         $this->loggerService = $loggerService;

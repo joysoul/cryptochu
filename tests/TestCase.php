@@ -2,7 +2,7 @@
 namespace cryptochu\tests;
 
 use cryptochu\http\contracts\HttpClient;
-use cryptochu\services\contracts\LoggerServiceContract;
+use cryptochu\services\contracts\LoggingServiceContract;
 use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
@@ -40,16 +40,16 @@ abstract class TestCase extends BaseTestCase
      * @param Invocation $matcher
      * @param string $method
      *
-     * @return LoggerServiceContract
+     * @return LoggingServiceContract
      */
     protected function getMockLoggerServiceThatIsCalled(
         Invocation $matcher,
         string $method = self::METHOD_LOGGER_SERVICE_INFO
-    ): LoggerServiceContract {
-        $mockLoggerService = static::createMock(LoggerServiceContract::class);
+    ): LoggingServiceContract {
+        $mockLoggerService = static::createMock(LoggingServiceContract::class);
         $mockLoggerService->expects($matcher)->method($method);
 
-        /** @var LoggerServiceContract $mockLoggerService */
+        /** @var LoggingServiceContract $mockLoggerService */
         return $mockLoggerService;
     }
 }

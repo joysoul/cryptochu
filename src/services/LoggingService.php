@@ -1,7 +1,7 @@
 <?php
 namespace cryptochu\services;
 
-use cryptochu\services\contracts\LoggerServiceContract;
+use cryptochu\services\contracts\LoggingServiceContract;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 
@@ -9,7 +9,7 @@ use Monolog\Logger;
  * @author Emile Pels
  * @package cryptochu\services
  */
-class LoggerService extends Logger implements LoggerServiceContract
+class LoggingService extends Logger implements LoggingServiceContract
 {
     /**
      * Logger constants.

@@ -7,7 +7,7 @@ use Psr\Log\LoggerInterface;
  * @author Emile Pels
  * @package cryptochu\services\contracts
  */
-interface LoggerServiceContract extends LoggerInterface
+interface LoggingServiceContract extends LoggerInterface
 {
 
 }
