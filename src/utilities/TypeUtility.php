@@ -66,9 +66,7 @@ class TypeUtility
      */
     public static function assertIsType($value, string $type)
     {
-        if (static::isType($value, $type)) {
-            // Ok
-        } else {
+        if (static::isType($value, $type) === false) {
             throw new TypeException(vsprintf(self::ERROR_UNEXPECTED_TYPE, [$type, static::getType($value)]));
         }
     }
