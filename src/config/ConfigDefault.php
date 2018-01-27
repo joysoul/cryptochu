@@ -23,4 +23,14 @@ abstract class ConfigDefault implements ConfigContract
     {
         return 'cryptochu';
     }
+
+    /**
+     * User agent that MAY be used during HTTP requests.
+     *
+     * @return string
+     */
+    public function httpClientUserAgent(): string
+    {
+        return 'cryptochu/0.1';
+    }
 }

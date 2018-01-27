@@ -1,6 +1,7 @@
 <?php
 namespace cryptochu\http;
 
+use cryptochu\config\contracts\ConfigContract;
 use cryptochu\exceptions\HttpException;
 use cryptochu\http\contracts\HttpClient;
 use cryptochu\utilities\TypeUtility;
@@ -22,7 +23,19 @@ class CurlHttpClient implements HttpClient
      * cURL option constants.
      */
     const CURL_OPTION_RETURN_TRANSFER = true;
-    const CURL_OPTION_USER_AGENT = 'cryptochu/0.1'; // @todo 20180120 emilepels Extract this to config file?
+
+    /**
+     * @var ConfigContract
+     */
+    private $config;
+
+    /**
+     * @param ConfigContract $config
+     */
+    public function __construct(ConfigContract $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * Gets remote content over HTTP.
@@ -38,13 +51,23 @@ class CurlHttpClient implements HttpClient
 
         // Return the response rather than outputting to STDOUT.
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, self::CURL_OPTION_RETURN_TRANSFER);
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, self::CURL_OPTION_USER_AGENT);
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, $this->getUserAgent());
 
         $result = curl_exec($curlHandle);
 
         $this->assertCurlResultValid($result, $curlHandle);
 
         return $result;
+    }
+
+    /**
+     * Gets the user agent to use for HTTP requests.
+     *
+     * @return string
+     */
+    protected function getUserAgent(): string
+    {
+        return $this->config->httpClientUserAgent();
     }
 
     /**

@@ -13,4 +13,11 @@ interface ConfigContract
      * @return string
      */
     public function appName(): string;
+
+    /**
+     * User agent that MAY be used during HTTP requests.
+     *
+     * @return string
+     */
+    public function httpClientUserAgent(): string;
 }
