@@ -15,6 +15,20 @@ interface ConfigContract
     public function appName(): string;
 
     /**
+     * Directory to use for caching on the file system.
+     *
+     * @return string
+     */
+    public function fileSystemCacheDirectory(): string;
+
+    /**
+     * Number of seconds the HttpClient's cache is valid for.
+     *
+     * @return int
+     */
+    public function httpClientCacheExpiresAfterSeconds(): int;
+
+    /**
      * User agent that MAY be used during HTTP requests.
      *
      * @return string
