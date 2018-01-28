@@ -6,7 +6,9 @@ use cryptochu\services\contracts\CachingServiceContract;
 use Doctrine\Common\Cache\FilesystemCache;
 
 /**
- * @todo Document
+ * FileSystemCachingService caches items on the local file system. By default, all instances of this service share the
+ * same directory and could thus be considered identical. This behaviour can be overridden by providing a directory
+ * suffix: this makes it possible to have dedicated directories for each instance.
  *
  * @author Emile Pels
  * @package cryptochu\services
@@ -53,7 +55,7 @@ class FileSystemCachingService implements CachingServiceContract
     }
 
     /**
-     * If has() is true, this returns the corresponding value. Otherwise, $default is returned.
+     * If set and not expired, this returns the corresponding value. Otherwise, $default is returned.
      *
      * @param string $key
      * @param mixed $default
