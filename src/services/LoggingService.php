@@ -42,7 +42,7 @@ class LoggingService extends Logger implements LoggingServiceContract
     protected function getDefaultHandlers(): array
     {
         return [
-            // No handlers. Logs will be written to stdout.
+            // No handlers. Logs will be written to STDOUT.
         ];
     }
 }

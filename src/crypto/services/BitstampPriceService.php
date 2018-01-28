@@ -81,7 +81,7 @@ class BitstampPriceService implements PriceServiceContract
             $this->getJsonByCryptoCurrency($cryptoCurrency)[self::KEY_ASK]
         );
 
-        $this->loggerService->info('Price retrieved', [
+        $this->loggerService->info('bitstampPriceService.askRetrieved', [
             'amount' => MoneyAmountFormatter::formatAsString($ask),
             'exchange' => $this->getExchangeName(),
             'type' => 'ask',
@@ -103,7 +103,7 @@ class BitstampPriceService implements PriceServiceContract
             $this->getJsonByCryptoCurrency($cryptoCurrency)[self::KEY_BID]
         );
 
-        $this->loggerService->info('Price retrieved', [
+        $this->loggerService->info('bitstampPriceService.bidRetrieved', [
             'amount' => MoneyAmountFormatter::formatAsString($bid),
             'exchange' => $this->getExchangeName(),
             'type' => 'bid',

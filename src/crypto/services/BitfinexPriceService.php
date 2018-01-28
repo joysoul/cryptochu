@@ -81,7 +81,7 @@ class BitfinexPriceService implements PriceServiceContract
             $this->getJsonByCryptoCurrency($cryptoCurrency)[self::KEY_ASK]
         );
 
-        $this->loggerService->info('Price retrieved', [
+        $this->loggerService->info('bitfinexPriceService.askRetrieved', [
             'amount' => MoneyAmountFormatter::formatAsString($ask),
             'exchange' => $this->getExchangeName(),
             'type' => 'ask',
@@ -103,7 +103,7 @@ class BitfinexPriceService implements PriceServiceContract
             $this->getJsonByCryptoCurrency($cryptoCurrency)[self::KEY_BID]
         );
 
-        $this->loggerService->info('Price retrieved', [
+        $this->loggerService->info('bitfinexPriceService.bidRetrieved', [
             'amount' => MoneyAmountFormatter::formatAsString($bid),
             'exchange' => $this->getExchangeName(),
             'type' => 'bid',
