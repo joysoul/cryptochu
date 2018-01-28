@@ -4,6 +4,7 @@ namespace cryptochu\http;
 use cryptochu\config\contracts\ConfigContract;
 use cryptochu\exceptions\HttpException;
 use cryptochu\http\contracts\HttpClient;
+use cryptochu\services\contracts\CachingServiceContract;
 use cryptochu\services\contracts\LoggingServiceContract;
 use cryptochu\utilities\TypeUtility;
 
@@ -31,6 +32,11 @@ class CurlHttpClient implements HttpClient
     const HTTP_METHOD_GET = 'GET';
 
     /**
+     * @var CachingServiceContract
+     */
+    private $cachingService;
+
+    /**
      * @var ConfigContract
      */
     private $config;
@@ -41,11 +47,16 @@ class CurlHttpClient implements HttpClient
     private $loggingService;
 
     /**
+     * @param CachingServiceContract $cachingService
      * @param ConfigContract $config
      * @param LoggingServiceContract $loggingService
      */
-    public function __construct(ConfigContract $config, LoggingServiceContract $loggingService)
-    {
+    public function __construct(
+        CachingServiceContract $cachingService,
+        ConfigContract $config,
+        LoggingServiceContract $loggingService
+    ) {
+        $this->cachingService = $cachingService;
         $this->config = $config;
         $this->loggingService = $loggingService;
     }
@@ -60,6 +71,12 @@ class CurlHttpClient implements HttpClient
      */
     public function getContent(string $url): string
     {
+        if ($this->cachingService->has($url)) {
+            $this->logCacheHit($url);
+
+            return $this->cachingService->get($url);
+        }
+
         $curlHandle = curl_init($url);
 
         // Return the response rather than outputting to STDOUT.
@@ -70,6 +87,7 @@ class CurlHttpClient implements HttpClient
 
         $this->assertCurlResultValid($result, $curlHandle);
 
+        $this->cacheResult($url, $result);
         $this->logRequest(self::HTTP_METHOD_GET, $url, curl_getinfo($curlHandle, CURLINFO_HTTP_CODE));
 
         return $result;
@@ -107,10 +125,29 @@ class CurlHttpClient implements HttpClient
      */
     protected function logRequest(string $method, string $url, int $statusCode)
     {
-        $this->loggingService->info('HTTP request', [
+        $this->loggingService->info('httpClient.request', [
             'method' => $method,
             'url' => $url,
             'statusCode' => $statusCode,
+        ]);
+    }
+
+    /**
+     * @param string $url
+     * @param string $result
+     */
+    private function cacheResult(string $url, string $result)
+    {
+        $this->cachingService->set($url, $result, $this->config->httpClientCacheExpiresAfterSeconds());
+    }
+
+    /**
+     * @param string $url
+     */
+    private function logCacheHit(string $url)
+    {
+        $this->loggingService->info('httpClient.cacheHit', [
+            'url' => $url,
         ]);
     }
 }
