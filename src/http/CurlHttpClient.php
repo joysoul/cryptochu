@@ -4,6 +4,7 @@ namespace cryptochu\http;
 use cryptochu\config\contracts\ConfigContract;
 use cryptochu\exceptions\HttpException;
 use cryptochu\http\contracts\HttpClient;
+use cryptochu\services\contracts\LoggingServiceContract;
 use cryptochu\utilities\TypeUtility;
 
 /**
@@ -25,16 +26,28 @@ class CurlHttpClient implements HttpClient
     const CURL_OPTION_RETURN_TRANSFER = true;
 
     /**
+     * HTTP method  constants.
+     */
+    const HTTP_METHOD_GET = 'GET';
+
+    /**
      * @var ConfigContract
      */
     private $config;
 
     /**
-     * @param ConfigContract $config
+     * @var LoggingServiceContract
      */
-    public function __construct(ConfigContract $config)
+    private $loggingService;
+
+    /**
+     * @param ConfigContract $config
+     * @param LoggingServiceContract $loggingService
+     */
+    public function __construct(ConfigContract $config, LoggingServiceContract $loggingService)
     {
         $this->config = $config;
+        $this->loggingService = $loggingService;
     }
 
     /**
@@ -57,6 +70,8 @@ class CurlHttpClient implements HttpClient
 
         $this->assertCurlResultValid($result, $curlHandle);
 
+        $this->logRequest(self::HTTP_METHOD_GET, $url, curl_getinfo($curlHandle, CURLINFO_HTTP_CODE));
+
         return $result;
     }
 
@@ -76,12 +91,26 @@ class CurlHttpClient implements HttpClient
      *
      * @throws HttpException
      */
-    private function assertCurlResultValid($result, $curlHandle)
+    protected function assertCurlResultValid($result, $curlHandle)
     {
         if ($result === false) {
             throw new HttpException(vsprintf(self::ERROR_CURL_FAILED, [curl_error($curlHandle)]));
         }
 
         TypeUtility::assertIsType($result, TypeUtility::TYPE_STRING);
+    }
+
+    /**
+     * @param string $method
+     * @param string $url
+     * @param int $statusCode
+     */
+    protected function logRequest(string $method, string $url, int $statusCode)
+    {
+        $this->loggingService->info('HTTP request', [
+            'method' => $method,
+            'url' => $url,
+            'statusCode' => $statusCode,
+        ]);
     }
 }
