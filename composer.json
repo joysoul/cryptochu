@@ -20,7 +20,7 @@
     "require": {
         "monolog/monolog": "^1.23",
         "psr/log": "^1.0",
-        "doctrine/cache": "^1.7"
+        "doctrine/cache": "1.6.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
