@@ -153,8 +153,8 @@ class MoneyAmountParser
     {
         $moneyAmountStringPrepared = $this->prepareMoneyAmountStringForParsing($moneyAmountString);
 
-        $fmt = new NumberFormatter(self::PARSING_LOCALE, NumberFormatter::CURRENCY);
-        $parseResult = $fmt->parseCurrency($moneyAmountStringPrepared, $unusedReferenceOutputParameter);
+        $numberFormatter = new NumberFormatter(self::PARSING_LOCALE, NumberFormatter::CURRENCY);
+        $parseResult = $numberFormatter->parseCurrency($moneyAmountStringPrepared, $unusedReferenceOutputParameter);
 
         $this->assertParseResultSuccessful($parseResult);
 

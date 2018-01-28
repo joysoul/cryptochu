@@ -14,7 +14,12 @@
             "email": "maxh.teeuwen@gmail.com"
         }
     ],
-    "require": {},
+    "scripts": {
+        "test": "./vendor/bin/phpunit -c phpunit.xml --colors=always"
+    },
+    "require": {
+        "monolog/monolog": "^1.23"
+    },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
     },
@@ -22,6 +27,9 @@
         "psr-4": {
             "cryptochu\\common\\": "src/common/",
             "cryptochu\\common\\tests\\": "tests/common/",
+
+            "cryptochu\\config\\contracts\\": "src/config/contracts/",
+            "cryptochu\\config\\": "src/config/",
 
             "cryptochu\\crypto\\": "src/crypto/",
             "cryptochu\\crypto\\services\\": "src/crypto/services/",
@@ -34,6 +42,9 @@
 
             "cryptochu\\money\\": "src/money/",
             "cryptochu\\money\\tests\\": "tests/money/",
+
+            "cryptochu\\services\\": "src/services/",
+            "cryptochu\\services\\contracts\\": "tests/services/contracts/",
 
             "cryptochu\\tests\\": "tests/",
 

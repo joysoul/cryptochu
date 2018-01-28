@@ -4,13 +4,13 @@ namespace cryptochu\crypto\services\tests;
 use cryptochu\crypto\currencies\CryptoCurrency;
 use cryptochu\crypto\services\BitfinexPriceService;
 use cryptochu\money\MoneyAmountBuilder;
-use cryptochu\tests\HttpTestCase;
+use cryptochu\tests\TestCase;
 
 /**
  * @author Emile Pels
  * @package cryptochu\crypto\services\tests
  */
-class BitfinexPriceServiceTest extends HttpTestCase
+class BitfinexPriceServiceTest extends TestCase
 {
     /**
      * Fake response.
@@ -19,16 +19,32 @@ class BitfinexPriceServiceTest extends HttpTestCase
         . '"high":"13017.0","volume":"47729.55925216","timestamp":"1516479579.1908865"}';
 
     /**
+     * @var BitfinexPriceService
+     */
+    private $bitfinexPriceService;
+
+    /**
+     *
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->bitfinexPriceService = new BitfinexPriceService(
+            $this->getHttpClientThatReturnsContent(self::FAKE_RESPONSE),
+            $this->getMockLoggerServiceThatIsCalled(static::once())
+        );
+    }
+
+    /**
      *
      */
     public function testGetAsk()
     {
-        $httpClient = $this->getHttpClientThatReturnsContent(self::FAKE_RESPONSE);
-
-        $bitfinexPriceService = new BitfinexPriceService($httpClient);
-        $ask = $bitfinexPriceService->getAsk(CryptoCurrency::bitcoin());
-
-        static::assertEquals(MoneyAmountBuilder::fromUnitedStatesDollar()->whole(12708)->build(), $ask);
+        static::assertEquals(
+            MoneyAmountBuilder::fromUnitedStatesDollar()->whole(12708)->build(),
+            $this->bitfinexPriceService->getAsk(CryptoCurrency::bitcoin())
+        );
     }
 
     /**
@@ -36,11 +52,9 @@ class BitfinexPriceServiceTest extends HttpTestCase
      */
     public function testGetBid()
     {
-        $httpClient = $this->getHttpClientThatReturnsContent(self::FAKE_RESPONSE);
-
-        $bitfinexPriceService = new BitfinexPriceService($httpClient);
-        $bid = $bitfinexPriceService->getBid(CryptoCurrency::bitcoin());
-
-        static::assertEquals(MoneyAmountBuilder::fromUnitedStatesDollar()->whole(12707)->build(), $bid);
+        static::assertEquals(
+            MoneyAmountBuilder::fromUnitedStatesDollar()->whole(12707)->build(),
+            $this->bitfinexPriceService->getBid(CryptoCurrency::bitcoin())
+        );
     }
 }
