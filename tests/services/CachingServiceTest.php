@@ -4,7 +4,6 @@ namespace cryptochu\services\tests;
 use cryptochu\common\EnumRegularCurrency;
 use cryptochu\exceptions\ValueException;
 use cryptochu\services\contracts\CachingServiceContract;
-use cryptochu\services\MemoryCachingService;
 use cryptochu\tests\TestCase;
 
 /**
@@ -17,12 +16,16 @@ abstract class CachingServiceTest extends TestCase
      * Cache expires after a minute.
      */
     const EXPIRES_AFTER_MINUTE = 60;
+
+    /**
+     * Cache expires after 0 seconds: now.
+     */
     const EXPIRES_NOW = 0;
 
     /**
      * @var CachingServiceContract
      */
-    private $cachingService;
+    protected $cachingService;
 
     /**
      *
@@ -37,15 +40,29 @@ abstract class CachingServiceTest extends TestCase
     /**
      *
      */
+    public function testClear()
+    {
+        $this->cachingService->set('foo', 'bar', self::EXPIRES_AFTER_MINUTE);
+
+        static::assertTrue($this->cachingService->has('foo'));
+
+        $this->cachingService->clear();
+
+        static::assertFalse($this->cachingService->has('foo'));
+    }
+
+    /**
+     *
+     */
     public function testDelete()
     {
-        static::assertFalse($this->cachingService->delete('foo'));
-
         $this->cachingService->set('foo', 'bar', self::EXPIRES_AFTER_MINUTE);
 
         static::assertNotNull($this->cachingService->get('foo'));
 
-        static::assertTrue($this->cachingService->delete('foo'));
+        $this->cachingService->delete('foo');
+
+        static::assertFalse($this->cachingService->has('foo'));
 
         static::assertNull($this->cachingService->get('foo'));
     }
@@ -134,13 +151,9 @@ abstract class CachingServiceTest extends TestCase
     {
         static::assertFalse($this->cachingService->has('foo'));
 
-        static::assertFalse($this->cachingService->set('foo', 'bar', self::EXPIRES_AFTER_MINUTE));
+        $this->cachingService->set('foo', 'bar', self::EXPIRES_AFTER_MINUTE);
 
         static::assertEquals('bar', $this->cachingService->get('foo'));
-
-        static::assertTrue($this->cachingService->set('foo', 'not bar', self::EXPIRES_AFTER_MINUTE));
-
-        static::assertEquals('not bar', $this->cachingService->get('foo'));
     }
 
     /**
