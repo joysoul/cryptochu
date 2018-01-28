@@ -17,6 +17,11 @@ namespace cryptochu\services\contracts;
 interface CachingServiceContract
 {
     /**
+     * Clears the cache by deleting all items.
+     */
+    public function clear();
+
+    /**
      * Deletes the value for the provided key if it is present in the cache.
      *
      * @param string $key
