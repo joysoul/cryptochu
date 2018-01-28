@@ -18,13 +18,10 @@ interface CachingServiceContract
 {
     /**
      * Deletes the value for the provided key if it is present in the cache.
-     * Return value indicates whether a delete actually happened.
      *
      * @param string $key
-     *
-     * @return bool
      */
-    public function delete(string $key): bool;
+    public function delete(string $key);
 
     /**
      * If has() is true, this returns the corresponding value. Otherwise, $default is returned.
@@ -47,13 +44,10 @@ interface CachingServiceContract
 
     /**
      * Adds a value to the cache that expires after the provided number of seconds.
-     * Return value indicates whether the cache already had a value for this key, in which case an override happens.
      *
      * @param string $key
      * @param $value
      * @param int $expiresAfterSeconds
-     *
-     * @return bool
      */
-    public function set(string $key, $value, int $expiresAfterSeconds): bool;
+    public function set(string $key, $value, int $expiresAfterSeconds);
 }
