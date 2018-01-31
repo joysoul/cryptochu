@@ -125,7 +125,7 @@ class CurlHttpClient implements HttpClient
      */
     protected function logRequest(string $method, string $url, int $statusCode)
     {
-        $this->loggingService->info('httpClient.request', [
+        $this->loggingService->info('CurlHttpClient ' .  __FUNCTION__, [
             'method' => $method,
             'url' => $url,
             'statusCode' => $statusCode,
@@ -146,7 +146,7 @@ class CurlHttpClient implements HttpClient
      */
     private function logCacheHit(string $url)
     {
-        $this->loggingService->info('httpClient.cacheHit', [
+        $this->loggingService->info('CurlHttpClient ' .  __FUNCTION__, [
             'url' => $url,
         ]);
     }
