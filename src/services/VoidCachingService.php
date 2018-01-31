@@ -15,7 +15,7 @@ use cryptochu\services\contracts\CachingServiceContract;
 class VoidCachingService implements CachingServiceContract
 {
     /**
-     * Clears the cache by deleting all items.
+     * Does nothing.
      */
     public function clear()
     {
@@ -23,7 +23,7 @@ class VoidCachingService implements CachingServiceContract
     }
 
     /**
-     * Deletes the value for the provided key if it is present in the cache.
+     * Does nothing.
      *
      * @param string $key
      */
@@ -33,12 +33,12 @@ class VoidCachingService implements CachingServiceContract
     }
 
     /**
-     * If has() is true, this returns the corresponding value. Otherwise, $default is returned.
+     * Returns null.
      *
      * @param string $key
      * @param mixed $default
      *
-     * @return mixed
+     * @return null
      */
     public function get(string $key, $default = null)
     {
@@ -46,7 +46,7 @@ class VoidCachingService implements CachingServiceContract
     }
 
     /**
-     * Returns true only if we have a value for the provided key that has not expired.
+     * Returns false.
      *
      * @param string $key
      *
@@ -58,7 +58,7 @@ class VoidCachingService implements CachingServiceContract
     }
 
     /**
-     * Adds a value to the cache that expires after the provided number of seconds.
+     * Does nothing.
      *
      * @param string $key
      * @param $value
