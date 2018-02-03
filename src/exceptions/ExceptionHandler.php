@@ -32,7 +32,7 @@ class ExceptionHandler
     }
 
     /**
-     * Simply throws an exception based on the error provided. Will be handled by handleException below.
+     * Handles errors, e.g. when a type hint is not properly set.
      *
      * @param int $errorSeverity
      * @param string $errorString
@@ -58,7 +58,9 @@ class ExceptionHandler
     }
 
     /**
-     * @param $exception
+     * Handles any uncaught exceptions.
+     *
+     * @param Throwable $exception
      */
     public function handleException(Throwable $exception)
     {
