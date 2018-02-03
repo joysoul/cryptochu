@@ -1,7 +1,7 @@
 <?php
-namespace cryptochu\exceptions\tests;
+namespace cryptochu\exceptions\handlers\tests;
 
-use cryptochu\exceptions\ExceptionHandler;
+use cryptochu\exceptions\handlers\GlobalHandler;
 use cryptochu\tests\TestCase;
 use Exception;
 
@@ -17,7 +17,7 @@ class ExceptionHandlerTest extends TestCase
     const METHOD_LOGGER_SERVICE_CRITICAL = 'critical';
 
     /**
-     * @var ExceptionHandler
+     * @var GlobalHandler
      */
     private $exceptionHandler;
 
@@ -28,7 +28,7 @@ class ExceptionHandlerTest extends TestCase
     {
         parent::setUp();
 
-        $this->exceptionHandler = new ExceptionHandler(
+        $this->exceptionHandler = new GlobalHandler(
             static::getMockLoggerServiceThatIsCalled(static::once(), self::METHOD_LOGGER_SERVICE_CRITICAL)
         );
     }

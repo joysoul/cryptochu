@@ -1,7 +1,7 @@
 <?php
 namespace cryptochu\bootstrap;
 
-use cryptochu\exceptions\ExceptionHandler;
+use cryptochu\exceptions\handlers\GlobalHandler;
 use cryptochu\services\LoggingService;
 
 /**
@@ -38,7 +38,7 @@ class Bootstrapper
         // @todo 20180203 emilepels See if we can inject the LoggingService somehow.
         // when we introduce a DIC, it is likely we'll bootstrap it in this class too.
         // This means this class will already be coupled to it, so we may as well get a logger from it then...
-        $handler = new ExceptionHandler(new LoggingService());
+        $handler = new GlobalHandler(new LoggingService());
 
         set_error_handler([$handler, 'handleError']);
         set_exception_handler([$handler, 'handleException']);

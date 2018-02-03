@@ -1,8 +1,9 @@
 <?php
-namespace cryptochu\exceptions;
+namespace cryptochu\exceptions\handlers;
 
+use cryptochu\exceptions\handlers\contracts\ErrorHandlerContract;
+use cryptochu\exceptions\handlers\contracts\ExceptionHandlerContract;
 use cryptochu\services\contracts\LoggingServiceContract;
-use ErrorException;
 use Throwable;
 
 /**
@@ -11,7 +12,7 @@ use Throwable;
  * @author Emile Pels
  * @package cryptochu\exceptions
  */
-class ExceptionHandler
+class GlobalHandler implements ErrorHandlerContract, ExceptionHandlerContract
 {
     /**
      * Signal the normal error handler should not continue after handleError.
@@ -32,7 +33,8 @@ class ExceptionHandler
     }
 
     /**
-     * Handles errors, e.g. when a type hint is not properly set.
+     * Handles an error. Compliant with the callback expected by PHP's set_error_handler.
+     * See also: http://php.net/manual/en/function.set-error-handler.php
      *
      * @param int $errorSeverity
      * @param string $errorString
@@ -40,7 +42,6 @@ class ExceptionHandler
      * @param int $errorLine
      *
      * @return bool
-     * @throws ErrorException
      */
     public function handleError(int $errorSeverity, string $errorString, string $errorFile, int $errorLine): bool
     {
@@ -58,7 +59,8 @@ class ExceptionHandler
     }
 
     /**
-     * Handles any uncaught exceptions.
+     * Handles an exception. Compliant with the callback expected by PHP's set_exception_handler.
+     * See also: http://php.net/manual/en/function.set-exception-handler.php
      *
      * @param Throwable $exception
      */
