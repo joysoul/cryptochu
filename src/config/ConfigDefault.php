@@ -23,4 +23,32 @@ abstract class ConfigDefault implements ConfigContract
     {
         return 'cryptochu';
     }
+
+    /**
+     * Directory to use for caching on the file system.
+     *
+     * @return string
+     */
+    public function fileSystemCacheDirectory(): string
+    {
+        return '/tmp/cryptochu';
+    }
+
+    /**
+     * @return int
+     */
+    public function httpClientCacheExpiresAfterSeconds(): int
+    {
+        return 5;
+    }
+
+    /**
+     * User agent that MAY be used during HTTP requests.
+     *
+     * @return string
+     */
+    public function httpClientUserAgent(): string
+    {
+        return 'cryptochu/0.1';
+    }
 }
