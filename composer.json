@@ -20,7 +20,8 @@
     "require": {
         "monolog/monolog": "^1.23",
         "psr/log": "^1.0",
-        "doctrine/cache": "1.6.2"
+        "doctrine/cache": "1.6.2",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
@@ -39,6 +40,9 @@
             "cryptochu\\crypto\\tests\\": "tests/crypto/",
 
             "cryptochu\\exceptions\\": "src/exceptions/",
+            "cryptochu\\exceptions\\handlers\\": "src/exceptions/handlers/",
+            "cryptochu\\exceptions\\handlers\\contracts\\": "src/exceptions/handlers/contracts/",
+            "cryptochu\\exceptions\\handlers\\tests\\": "tests/exceptions/handlers/",
 
             "cryptochu\\http\\": "src/http/",
 
