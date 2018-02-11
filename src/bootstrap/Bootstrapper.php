@@ -27,7 +27,7 @@ class Bootstrapper
      */
     protected function enableAutoloader()
     {
-        require_once(__DIR__ . '/../../cryptochu_autoload.php');
+        require_once(__DIR__ . '/../../vendor/autoload.php');
     }
 
     /**
@@ -44,5 +44,3 @@ class Bootstrapper
         set_exception_handler([$handler, 'handleException']);
     }
 }
-
-(new Bootstrapper())->bootstrap();
