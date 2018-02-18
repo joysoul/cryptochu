@@ -21,13 +21,17 @@
         "monolog/monolog": "^1.23",
         "psr/log": "^1.0",
         "doctrine/cache": "1.6.2",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "php-di/php-di": "^5.4",
+        "ocramius/proxy-manager": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {
+            "cryptochu\\bootstrap\\": "src/bootstrap/",
+
             "cryptochu\\common\\": "src/common/",
             "cryptochu\\common\\tests\\": "tests/common/",
 
