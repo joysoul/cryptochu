@@ -2,7 +2,7 @@
 namespace cryptochu\bootstrap;
 
 use cryptochu\exceptions\handlers\GlobalHandler;
-use cryptochu\services\LoggingService;
+use cryptochu\services\MonologLoggingService;
 
 /**
  * Bootstraps the application to get it into an executable state.
@@ -38,7 +38,7 @@ class Bootstrapper
         // @todo 20180203 emilepels See if we can inject the LoggingService somehow.
         // when we introduce a DIC, it is likely we'll bootstrap it in this class too.
         // This means this class will already be coupled to it, so we may as well get a logger from it then...
-        $handler = new GlobalHandler(new LoggingService());
+        $handler = new GlobalHandler(new MonologLoggingService());
 
         set_error_handler([$handler, 'handleError']);
         set_exception_handler([$handler, 'handleException']);
