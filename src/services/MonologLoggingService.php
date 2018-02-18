@@ -9,7 +9,7 @@ use Monolog\Logger;
  * @author Emile Pels
  * @package cryptochu\services
  */
-class LoggingService extends Logger implements LoggingServiceContract
+class MonologLoggingService extends Logger implements LoggingServiceContract
 {
     /**
      * Logger constants.
